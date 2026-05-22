@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     // AMAN DI SINI: Link GitHub ditaruh di sisi Server, pembeli TIDAK BISA melihat baris ini!
     // Ganti dengan URL RAW whitelist.txt milikmu.
     // =====================================================================================
-    const GITHUB_RAW_URL = "https://raw.githubusercontent.com/HarunEpep/keamanan2/refs/heads/main/whitelist.txt";
+    const GITHUB_RAW_URL = "https://raw.githubusercontent.com/HarunEpep/Secure/refs/heads/main/whitelist.txt";
 
     // Ambil data dari github secara real-time (anti-cache)
     const response = await fetch(`${GITHUB_RAW_URL}?t=${new Date().getTime()}`);
