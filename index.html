@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Runz Licenses Verification Server</title>
+  <title>Nexotis Licenses Verification Server</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
   
@@ -16,9 +16,9 @@
     }
   </style>
 </head>
-<body class="bg-[#020503] text-gray-200 antialiased font-sans min-h-screen flex flex-col justify-between relative overflow-x-hidden selection:bg-emerald-500/30 selection:text-emerald-300">
+<body class="bg-[#020503] text-gray-200 antialiased font-sans min-h-screen flex flex-col justify-between relative overflow-x-hidden selection:bg-emerald-500/30 selection:text-emerald-300" oncontextmenu="return false;">
 
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[400px] bg-gradient-glow pointer-events-none" />
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[400px] bg-gradient-glow pointer-events-none"></div>
 
   <header class="border-b border-emerald-950/40 bg-[#020603]/80 backdrop-blur-md relative z-10 px-6 py-4">
     <div class="max-w-5xl mx-auto flex items-center justify-between">
@@ -28,7 +28,7 @@
         </div>
         <div>
           <span class="font-bold tracking-wider text-sm bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent block">
-            RUNZ SERVER
+            NEXOTIS SERVER
           </span>
           <span class="block text-[10px] text-emerald-400 font-bold tracking-widest mt-0.5">WHITELIST SYSTEM</span>
         </div>
@@ -65,6 +65,7 @@
             placeholder="Contoh: HWID-ANDROID... atau PC-UUID-..."
             class="w-full bg-[#010302] border border-emerald-950 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/20 rounded-xl px-4 py-3.5 text-sm text-white placeholder-gray-700 outline-none transition-all duration-200 font-mono tracking-wide shadow-inner"
             required
+            autocomplete="off"
           />
         </div>
 
@@ -106,7 +107,7 @@
         </div>
 
         <div id="panelError" class="bg-amber-950/20 border border-amber-500/30 p-3 rounded-xl text-center text-xs text-amber-400 hidden">
-          ⚠️ Gagal menyinkronkan data! Periksa konfigurasi berkas URL GitHub Raw Whitelist kamu.
+          ⚠️ Gagal menyinkronkan data! Terjadi gangguan respon pada sistem API.
         </div>
 
       </div>
@@ -132,77 +133,98 @@
   </footer>
 
   <script>
-  // Set Tahun Otomatis di Footer
-  document.getElementById('year').textContent = new Date().getFullYear();
+    // 1. TIMING & FOOTER YEAR SET
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-  const form = document.getElementById('licenseForm');
-  const hwidInput = document.getElementById('hwidInput');
-  const submitBtn = document.getElementById('submitBtn');
-  
-  const resultContainer = document.getElementById('resultContainer');
-  const panelVerified = document.getElementById('panelVerified');
-  const panelNotVerified = document.getElementById('panelNotVerified');
-  const panelError = document.getElementById('panelError');
-  
-  const hwidSuccessText = document.getElementById('hwidSuccessText');
-  const hwidFailText = document.getElementById('hwidFailText');
+    // 2. AMAN: FITUR ANTI-F12 & CEGAT INSPECT ELEMENT
+    document.addEventListener('keydown', function(e) {
+      // Blokir F12
+      if (e.key === "F12" || e.keyCode === 123) {
+        e.preventDefault();
+        return false;
+      }
+      // Blokir Ctrl+Shift+I (Inspect)
+      if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.keyCode === 73)) {
+        e.preventDefault();
+        return false;
+      }
+      // Blokir Ctrl+Shift+J (Console)
+      if (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.keyCode === 74)) {
+        e.preventDefault();
+        return false;
+      }
+      // Blokir Ctrl+U (View Source)
+      if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.keyCode === 85)) {
+        e.preventDefault();
+        return false;
+      }
+    });
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+    // Cegat pembukaan DevTools via fungsi loop debugger terus-menerus
+    setInterval(function() {
+      debugger;
+    }, 100);
+
+    // 3. LOGIKA TOMBOL FORM VALIDASI
+    const form = document.getElementById('licenseForm');
+    const hwidInput = document.getElementById('hwidInput');
+    const submitBtn = document.getElementById('submitBtn');
     
-    const rawInput = hwidInput.value;
-    if (!rawInput.trim()) return;
+    const resultContainer = document.getElementById('resultContainer');
+    const panelVerified = document.getElementById('panelVerified');
+    const panelNotVerified = document.getElementById('panelNotVerified');
+    const panelError = document.getElementById('panelError');
+    
+    const hwidSuccessText = document.getElementById('hwidSuccessText');
+    const hwidFailText = document.getElementById('hwidFailText');
 
-    const cleanInput = rawInput.trim().toUpperCase();
-
-    // Efek Animasi Loading Tombol
-    submitBtn.disabled = true;
-    submitBtn.textContent = "MENGHUBUNGKAN...";
-
-    // Reset Tampilan Panel Hasil
-    resultContainer.classList.add('hidden');
-    panelVerified.classList.add('hidden');
-    panelNotVerified.classList.add('hidden');
-    panelError.classList.add('hidden');
-
-    try {
-      // AMAN: Kita cuma menembak ke route internal Vercel, link GitHub tidak bocor di browser!
-      const response = await fetch('/api/check', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ hwid: cleanInput })
-      });
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
       
-      if (!response.ok) {
-        throw new Error('Server Error');
+      const rawInput = hwidInput.value;
+      if (!rawInput.trim()) return;
+
+      const cleanInput = rawInput.trim().toUpperCase();
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "MENGHUBUNGKAN...";
+
+      resultContainer.classList.add('hidden');
+      panelVerified.classList.add('hidden');
+      panelNotVerified.classList.add('hidden');
+      panelError.classList.add('hidden');
+
+      try {
+        const response = await fetch('/api/check', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ hwid: cleanInput })
+        });
+        
+        if (!response.ok) throw new Error('Server API Error');
+
+        const data = await response.json();
+        resultContainer.classList.remove('hidden');
+
+        if (data.verified === true) {
+          hwidSuccessText.textContent = cleanInput;
+          panelVerified.classList.remove('hidden');
+        } else {
+          hwidFailText.textContent = cleanInput;
+          panelNotVerified.classList.remove('hidden');
+        }
+
+      } catch (error) {
+        console.error(error);
+        resultContainer.classList.remove('hidden');
+        panelError.classList.remove('hidden');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "VALIDASI LISENSI";
       }
-
-      const data = await response.json();
-
-      // Memunculkan Container Hasil Utama
-      resultContainer.classList.remove('hidden');
-
-      // Membaca status boolean hasil filter aman dari server
-      if (data.verified === true) {
-        hwidSuccessText.textContent = cleanInput;
-        panelVerified.classList.remove('hidden');
-      } else {
-        hwidFailText.textContent = cleanInput;
-        panelNotVerified.classList.remove('hidden');
-      }
-
-    } catch (error) {
-      console.error(error);
-      resultContainer.classList.remove('hidden');
-      panelError.classList.remove('hidden');
-    } finally {
-      // Kembalikan Tombol ke Normal
-      submitBtn.disabled = false;
-      submitBtn.textContent = "VALIDASI LISENSI";
-    }
-  });
-</script>
+    });
+  </script>
 </body>
 </html>
