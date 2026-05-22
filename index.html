@@ -9,63 +9,56 @@
   
   <style>
     body {
-      background-color: #030511;
-    }
-    /* Efek cahaya glow perpaduan Biru, Ungu, dan Hijau di background */
-    .bg-gradient-glow {
-      background: radial-gradient(circle at 50% -20%, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.1) 35%, rgba(34, 197, 94, 0.05) 70%, rgba(3, 5, 17, 0) 100%);
+      background-color: #0b0f19;
     }
   </style>
 </head>
-<body class="bg-[#030511] text-gray-200 antialiased font-sans min-h-screen flex flex-col justify-between relative overflow-x-hidden selection:bg-purple-500/30 selection:text-purple-300" oncontextmenu="return false;">
+<body class="bg-[#0b0f19] text-gray-300 antialiased font-sans min-h-screen flex flex-col justify-between relative selection:bg-indigo-500/30 selection:text-indigo-200" oncontextmenu="return false;">
 
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-gradient-glow pointer-events-none"></div>
-
-  <header class="border-b border-indigo-950/50 bg-[#04071a]/80 backdrop-blur-md relative z-10 px-6 py-4">
+  <header class="border-b border-slate-800 bg-[#0e1422] px-6 py-4">
     <div class="max-w-5xl mx-auto flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-500 via-indigo-500 to-emerald-400 flex items-center justify-center font-black text-black text-base shadow-lg shadow-indigo-500/20">
+        <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center font-bold text-white text-sm shadow-sm">
           R
         </div>
         <div>
-          <span class="font-bold tracking-wider text-sm bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent block">
+          <span class="font-bold tracking-wide text-sm text-slate-100 block">
             RUNZ SERVER
           </span>
-          <span class="block text-[10px] text-purple-400 font-bold tracking-widest mt-0.5">WHITELIST SYSTEM</span>
+          <span class="block text-[10px] text-slate-400 font-semibold tracking-wider">WHITELIST SYSTEM</span>
         </div>
       </div>
-      <div class="flex items-center gap-4 text-xs font-medium">
-        <span class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-inner">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+      <div class="flex items-center text-xs">
+        <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
           Sistem Online
         </span>
       </div>
     </div>
   </header>
 
-  <main class="max-w-md w-full mx-auto px-4 py-16 relative z-10 flex-grow flex flex-col justify-center">
-    <div class="bg-[#060a22] border border-indigo-950/60 rounded-2xl p-6 shadow-2xl shadow-black/90 backdrop-blur-sm relative overflow-hidden">
+  <main class="max-w-md w-full mx-auto px-4 py-12 flex-grow flex flex-col justify-center">
+    <div class="bg-[#0e1422] border border-slate-800 rounded-xl p-6 shadow-xl">
       
-      <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-purple-500 to-indigo-500"></div>
-
-      <div class="text-center mb-8">
-        <h1 class="text-lg font-bold tracking-tight text-white mb-1.5">Aktivasi & Verifikasi Lisensi</h1>
-        <p class="text-xs text-gray-400 max-w-xs mx-auto">
-          Salin HWID yang didapat di monetloader untuk memeriksa status perangkat.
+      <div class="mb-6">
+        <h1 class="text-base font-bold text-slate-100 mb-1">Aktivasi & Verifikasi Lisensi</h1>
+        <p class="text-xs text-slate-400">
+          Masukkan HWID perangkat Anda untuk memeriksa status akses database.
         </p>
       </div>
 
       <form id="licenseForm" class="space-y-4">
         <div>
-          <label class="block text-[10px] font-bold text-indigo-400 tracking-widest uppercase mb-2">
-            MASUKKAN HWID
+          <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1.5">
+            MASUKKAN HWID (Min. 8 Karakter)
           </label>
           <input
             id="hwidInput"
             type="text"
             placeholder="Contoh: HWID-ANDROID... atau PC-UUID-..."
-            class="w-full bg-[#02040f] border border-indigo-950 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/20 rounded-xl px-4 py-3.5 text-sm text-white placeholder-gray-700 outline-none transition-all duration-200 font-mono tracking-wide shadow-inner"
+            class="w-full bg-[#070a12] border border-slate-800 focus:border-indigo-500 rounded-lg px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-600 outline-none transition-colors duration-150 font-mono"
             required
+            minlength="8"
             autocomplete="off"
           />
         </div>
@@ -73,89 +66,89 @@
         <button
           id="submitBtn"
           type="submit"
-          class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 active:scale-[0.99] text-white font-extrabold text-xs tracking-wider uppercase py-4 rounded-xl transition-all duration-150 shadow-md shadow-indigo-950/50 cursor-pointer"
+          class="w-full bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-bold text-xs tracking-wide uppercase py-3 rounded-lg transition-colors duration-150 shadow-sm cursor-pointer"
         >
           VALIDASI LISENSI
         </button>
 
         <a
-          href="https://wa.me/628xxxxxxxxxx" 
+          href="https://wa.me/6285731899425" 
           target="_blank"
-          class="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 active:scale-[0.99] text-white font-extrabold text-xs tracking-wider uppercase py-3.5 rounded-xl transition-all duration-150 shadow-md shadow-emerald-950/30 cursor-pointer"
+          class="flex items-center justify-center gap-2 w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs tracking-wide uppercase py-3 rounded-lg transition-colors duration-150 border border-slate-700 cursor-pointer"
         >
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 12.008 0c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 12.002-11.95 12.002-.109 0-.218 0-.327-.005-2.002-.031-3.95-.543-5.661-1.48L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.725 1.451 5.405.002 9.803-4.392 9.806-9.799.002-2.618-1.016-5.083-2.868-6.937C16.46 1.917 14.0 1.0 11.382 1.0 5.976 1.0 1.574 5.397 1.571 10.804c-.001 1.631.436 3.22 1.264 4.62l-.999 3.648 3.73-.978zm11.348-4.494c-.24-.12-1.423-.702-1.644-.782-.221-.08-.381-.12-.542.12-.162.24-.622.782-.762.943-.14.16-.28.18-.52.06-.24-.12-.914-.337-1.742-1.076-.644-.575-1.079-1.285-1.205-1.504-.126-.219-.014-.338.106-.457.108-.108.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.542-1.305-.743-1.785-.195-.468-.393-.404-.542-.412-.139-.007-.3-.008-.461-.008-.162 0-.424.06-.646.301-.222.24-.846.823-.846 2.006 0 1.183.862 2.326.982 2.486.12.16 1.7 2.595 4.116 3.633.575.247 1.024.395 1.374.507.578.184 1.103.158 1.518.096.462-.069 1.423-.581 1.624-1.143.201-.562.201-1.043.142-1.143-.06-.1-.221-.16-.462-.28z"/>
-          </svg>
           HUBUNGI OWNER
         </a>
       </form>
 
-      <div id="resultContainer" class="mt-6 pt-6 border-t border-indigo-950/50 hidden">
+      <div id="resultContainer" class="mt-5 pt-5 border-t border-slate-800 hidden">
         
-        <div id="panelVerified" class="bg-emerald-950/10 border border-emerald-500/30 p-4 rounded-xl flex flex-col items-center text-center space-y-2 hidden">
-          <div class="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-400 text-sm font-bold">
-            ✓
-          </div>
-          <div>
-            <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Akses Diizinkan (Verified)</h3>
-            <p id="hwidSuccessText" class="text-[10px] text-emerald-400 font-mono break-all bg-[#02040f] p-2 mt-1.5 rounded border border-indigo-950/40"></p>
-            <p class="text-xs text-gray-300 mt-2 leading-relaxed">
-              Selamat! Perangkat kamu terdaftar secara resmi, silahkan masuk ke game untuk memakai fitur.
-            </p>
+        <div id="panelVerified" class="bg-emerald-950/20 border border-emerald-800/50 p-4 rounded-lg hidden">
+          <div class="flex items-start gap-3">
+            <div class="w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-xs font-bold flex-shrink-0 mt-0.5">
+              ✓
+            </div>
+            <div>
+              <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wide">Akses Diizinkan (Verified)</h3>
+              <p id="hwidSuccessText" class="text-[10px] text-slate-300 font-mono break-all bg-[#070a12] p-2 mt-2 rounded border border-slate-800"></p>
+              <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                Selamat! Perangkat kamu terdaftar secara resmi, silahkan masuk ke game untuk memakai fitur.
+              </p>
+            </div>
           </div>
         </div>
 
-        <div id="panelNotVerified" class="bg-red-950/10 border border-red-500/30 p-4 rounded-xl flex flex-col items-center text-center space-y-3 hidden">
-          <div class="w-8 h-8 rounded-full bg-red-500/20 border border-red-400/40 flex items-center justify-center text-red-400 text-sm font-bold">
-            ✕
-          </div>
-          <div>
-            <h3 class="text-xs font-bold text-red-400 uppercase tracking-wider">Akses Ditolak (Unregistered)</h3>
-            <p id="hwidFailText" class="text-[10px] text-red-400 font-mono break-all bg-[#02040f] p-2 mt-1.5 rounded border border-indigo-950/40"></p>
-            <p class="text-xs text-gray-300 mt-2 leading-relaxed">
-              HWID tidak ditemukan di database atau lisensi kamu kedaluwarsa. Silakan salin HWID di atas dan hubungi Owner RunzStr untuk pendaftaran HwId.
-            </p>
+        <div id="panelNotVerified" class="bg-red-950/20 border border-red-900/50 p-4 rounded-lg hidden">
+          <div class="flex items-start gap-3 mb-3">
+            <div class="w-5 h-5 rounded-full bg-red-500/20 border border-red-500/40 flex items-center justify-center text-red-400 text-xs font-bold flex-shrink-0 mt-0.5">
+              ✕
+            </div>
+            <div>
+              <h3 class="text-xs font-bold text-red-400 uppercase tracking-wide">Akses Ditolak (Unregistered)</h3>
+              <p id="hwidFailText" class="text-[10px] text-slate-300 font-mono break-all bg-[#070a12] p-2 mt-2 rounded border border-slate-800"></p>
+              <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                HWID tidak ditemukan di database atau lisensi kamu kedaluwarsa. Silakan salin HWID di atas dan hubungi Owner RunzStr untuk pendaftaran HwId.
+              </p>
+            </div>
           </div>
           <a
             href="https://wa.me/6285731899425"
             target="_blank"
-            class="inline-flex items-center gap-1.5 text-[11px] font-bold text-white bg-red-600/30 border border-red-500/40 hover:bg-red-600/50 px-4 py-2 rounded-lg transition-all duration-150 cursor-pointer"
+            class="block text-center text-xs font-semibold text-white bg-red-700 hover:bg-red-600 px-4 py-2 rounded-lg transition-colors duration-150 cursor-pointer"
           >
             Daftar Lisensi via WhatsApp
           </a>
         </div>
 
-        <div id="panelError" class="bg-amber-950/20 border border-amber-500/30 p-3 rounded-xl text-center text-xs text-amber-400 hidden">
+        <div id="panelError" class="bg-amber-950/20 border border-amber-900/50 p-3 rounded-lg text-center text-xs text-amber-400 hidden">
           ⚠️ Gagal menyinkronkan data! Terjadi gangguan respon pada sistem API.
         </div>
 
       </div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-[10px] text-gray-500 bg-[#04071a]/60 p-4 border border-indigo-950/40 rounded-xl mt-6 leading-relaxed">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-[10px] text-slate-500 bg-[#0e1422]/50 p-4 border border-slate-800 rounded-xl mt-4 leading-relaxed">
       <div>
-        <span class="font-bold text-purple-400 block mb-0.5">Sinkronisasi Instan:</span>
+        <span class="font-bold text-slate-400 block mb-0.5">Sinkronisasi Instan:</span>
         Sistem web terhubung 24/7. Perubahan di database owner akan langsung berdampak instan di sini.
       </div>
       <div>
-        <span class="font-semibold text-indigo-400 block mb-0.5">Bantuan Validasi:</span>
+        <span class="font-semibold text-slate-400 block mb-0.5">Bantuan Validasi:</span>
         Pastikan pembeli menyalin kode lengkap termasuk header platformnya tanpa spasi tambahan di ujung teks.
       </div>
     </div>
   </main>
 
-  <footer class="border-t border-indigo-950/30 bg-[#02040f] relative z-10 px-6 py-4 text-center text-[11px] text-gray-600">
+  <footer class="border-t border-slate-800 bg-[#070a12] px-6 py-4 text-center text-[11px] text-slate-500">
     <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
       <div>© <span id="year"></span> RunzStr Guard. Seluruh Hak Cipta Dilindungi.</div>
-      <div class="text-gray-500 font-medium">Sistem Server Eksklusif RunzStr</div>
+      <div class="text-slate-500 font-medium">Sistem Server Eksklusif RunzStr</div>
     </div>
   </footer>
 
   <script>
-    // 1. TIMING & FOOTER YEAR SET
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // 2. AMAN: FITUR ANTI-F12 & CEGAT INSPECT ELEMENT
+    // FITUR ANTI-F12 & CEGAT INSPECT ELEMENT
     document.addEventListener('keydown', function(e) {
       if (e.key === "F12" || e.keyCode === 123) {
         e.preventDefault();
@@ -179,7 +172,7 @@
       debugger;
     }, 100);
 
-    // 3. LOGIKA TOMBOL FORM VALIDASI
+    // LOGIKA TOMBOL FORM VALIDASI
     const form = document.getElementById('licenseForm');
     const hwidInput = document.getElementById('hwidInput');
     const submitBtn = document.getElementById('submitBtn');
@@ -196,9 +189,13 @@
       e.preventDefault();
       
       const rawInput = hwidInput.value;
-      if (!rawInput.trim()) return;
-
       const cleanInput = rawInput.trim().toUpperCase();
+
+      // Validasi tambahan via JS untuk memastikan input minimal 8 karakter
+      if (cleanInput.length < 8) {
+        alert("HWID terlalu pendek. Minimal harus berisi 8 karakter.");
+        return;
+      }
 
       submitBtn.disabled = true;
       submitBtn.textContent = "MENGHUBUNGKAN...";
