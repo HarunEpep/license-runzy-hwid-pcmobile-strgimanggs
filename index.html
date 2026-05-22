@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Runz Licenses Verification Server</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    body {
+      background-color: #020503;
+    }
+    .bg-gradient-glow {
+      background: radial-gradient(circle at 50% -20%, rgba(0, 255, 76, 0.15) 0%, rgba(5, 19, 10, 0) 60%);
+    }
+  </style>
+</head>
+<body class="bg-[#020503] text-gray-200 antialiased font-sans min-h-screen flex flex-col justify-between relative overflow-x-hidden selection:bg-emerald-500/30 selection:text-emerald-300">
+
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[400px] bg-gradient-glow pointer-events-none" />
+
+  <header class="border-b border-emerald-950/40 bg-[#020603]/80 backdrop-blur-md relative z-10 px-6 py-4">
+    <div class="max-w-5xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-400 to-green-600 flex items-center justify-center font-black text-black text-base shadow-lg shadow-emerald-500/10">
+          N
+        </div>
+        <div>
+          <span class="font-bold tracking-wider text-sm bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent block">
+            RUNZ SERVER
+          </span>
+          <span class="block text-[10px] text-emerald-400 font-bold tracking-widest mt-0.5">WHITELIST SYSTEM</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 text-xs font-medium">
+        <span class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-inner">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          Sistem Online
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-md w-full mx-auto px-4 py-16 relative z-10 flex-grow flex flex-col justify-center">
+    <div class="bg-[#030a05] border border-emerald-950/60 rounded-2xl p-6 shadow-2xl shadow-black/90 backdrop-blur-sm relative overflow-hidden">
+      
+      <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-500/40 to-transparent"></div>
+
+      <div class="text-center mb-8">
+        <h1 class="text-lg font-bold tracking-tight text-white mb-1.5">Aktivasi & Verifikasi Lisensi</h1>
+        <p class="text-xs text-gray-400 max-w-xs mx-auto">
+          Periksa kecocokan HWID perangkat Windows PC atau Mobile Android kamu yang terdaftar di database utama ZaxxMewing.
+        </p>
+      </div>
+
+      <form id="licenseForm" class="space-y-4">
+        <div>
+          <label class="block text-[10px] font-bold text-emerald-400 tracking-widest uppercase mb-2">
+            MASUKKAN HWID PERANGKAT
+          </label>
+          <input
+            id="hwidInput"
+            type="text"
+            placeholder="Contoh: HWID-ANDROID... atau PC-UUID-..."
+            class="w-full bg-[#010302] border border-emerald-950 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/20 rounded-xl px-4 py-3.5 text-sm text-white placeholder-gray-700 outline-none transition-all duration-200 font-mono tracking-wide shadow-inner"
+            required
+          />
+        </div>
+
+        <button
+          id="submitBtn"
+          type="submit"
+          class="w-full bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 active:scale-[0.99] text-black font-extrabold text-xs tracking-wider uppercase py-4 rounded-xl transition-all duration-150 shadow-md shadow-emerald-950/40 cursor-pointer"
+        >
+          VALIDASI LISENSI
+        </button>
+      </form>
+
+      <div id="resultContainer" class="mt-6 pt-6 border-t border-emerald-950/50 hidden">
+        
+        <div id="panelVerified" class="bg-emerald-950/20 border border-emerald-500/30 p-4 rounded-xl flex flex-col items-center text-center space-y-2 hidden">
+          <div class="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-400 text-sm font-bold">
+            ✓
+          </div>
+          <div>
+            <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Akses Diizinkan (Verified)</h3>
+            <p id="hwidSuccessText" class="text-[10px] text-gray-500 font-mono break-all bg-[#010302] p-2 mt-1.5 rounded border border-emerald-950/40"></p>
+            <p class="text-xs text-gray-300 mt-2 leading-relaxed">
+              Selamat! Perangkat kamu terdaftar secara resmi. Segera jalankan perintah <span class="text-emerald-400 font-mono">/zpenebang</span> di dalam game.
+            </p>
+          </div>
+        </div>
+
+        <div id="panelNotVerified" class="bg-red-950/20 border border-red-500/30 p-4 rounded-xl flex flex-col items-center text-center space-y-2 hidden">
+          <div class="w-8 h-8 rounded-full bg-red-500/20 border border-red-400/40 flex items-center justify-center text-red-400 text-sm font-bold">
+            ✕
+          </div>
+          <div>
+            <h3 class="text-xs font-bold text-red-400 uppercase tracking-wider">Akses Ditolak (Unregistered)</h3>
+            <p id="hwidFailText" class="text-[10px] text-gray-500 font-mono break-all bg-[#010302] p-2 mt-1.5 rounded border border-emerald-950/40"></p>
+            <p class="text-xs text-gray-300 mt-2 leading-relaxed">
+              HWID tidak ditemukan di database atau lisensi kamu kedaluwarsa. Silakan salin HWID di atas dan hubungi Owner ZaxxMewing untuk pendaftaran berkas.
+            </p>
+          </div>
+        </div>
+
+        <div id="panelError" class="bg-amber-950/20 border border-amber-500/30 p-3 rounded-xl text-center text-xs text-amber-400 hidden">
+          ⚠️ Gagal menyinkronkan data! Periksa konfigurasi berkas URL GitHub Raw Whitelist kamu.
+        </div>
+
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-[10px] text-gray-500 bg-[#030804]/50 p-4 border border-emerald-950/30 rounded-xl mt-6 leading-relaxed">
+      <div>
+        <span class="font-bold text-emerald-400 block mb-0.5">Sinkronisasi Instan:</span>
+        Sistem web terhubung 24/7 tanpa perantara database MySQL berat. Perubahan di file teks repositori owner akan langsung berdampak instan di sini.
+      </div>
+      <div>
+        <span class="font-semibold text-emerald-400 block mb-0.5">Bantuan Validasi:</span>
+        Pastikan pembeli menyalin kode lengkap termasuk header platformnya tanpa spasi tambahan di ujung teks.
+      </div>
+    </div>
+  </main>
+
+  <footer class="border-t border-emerald-950/30 bg-[#010302] relative z-10 px-6 py-4 text-center text-[11px] text-gray-600">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div>© <span id="year"></span> Nexotis Guard. Seluruh Hak Cipta Dilindungi.</div>
+      <div class="text-gray-500 font-medium">Sistem Server Eksklusif ZaxxMewing</div>
+    </div>
+  </footer>
+
+  <script>
+  // Set Tahun Otomatis di Footer
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const form = document.getElementById('licenseForm');
+  const hwidInput = document.getElementById('hwidInput');
+  const submitBtn = document.getElementById('submitBtn');
+  
+  const resultContainer = document.getElementById('resultContainer');
+  const panelVerified = document.getElementById('panelVerified');
+  const panelNotVerified = document.getElementById('panelNotVerified');
+  const panelError = document.getElementById('panelError');
+  
+  const hwidSuccessText = document.getElementById('hwidSuccessText');
+  const hwidFailText = document.getElementById('hwidFailText');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const rawInput = hwidInput.value;
+    if (!rawInput.trim()) return;
+
+    const cleanInput = rawInput.trim().toUpperCase();
+
+    // Efek Animasi Loading Tombol
+    submitBtn.disabled = true;
+    submitBtn.textContent = "MENGHUBUNGKAN...";
+
+    // Reset Tampilan Panel Hasil
+    resultContainer.classList.add('hidden');
+    panelVerified.classList.add('hidden');
+    panelNotVerified.classList.add('hidden');
+    panelError.classList.add('hidden');
+
+    try {
+      // AMAN: Kita cuma menembak ke route internal Vercel, link GitHub tidak bocor di browser!
+      const response = await fetch('/api/check', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ hwid: cleanInput })
+      });
+      
+      if (!response.ok) {
+        throw new Error('Server Error');
+      }
+
+      const data = await response.json();
+
+      // Memunculkan Container Hasil Utama
+      resultContainer.classList.remove('hidden');
+
+      // Membaca status boolean hasil filter aman dari server
+      if (data.verified === true) {
+        hwidSuccessText.textContent = cleanInput;
+        panelVerified.classList.remove('hidden');
+      } else {
+        hwidFailText.textContent = cleanInput;
+        panelNotVerified.classList.remove('hidden');
+      }
+
+    } catch (error) {
+      console.error(error);
+      resultContainer.classList.remove('hidden');
+      panelError.classList.remove('hidden');
+    } finally {
+      // Kembalikan Tombol ke Normal
+      submitBtn.disabled = false;
+      submitBtn.textContent = "VALIDASI LISENSI";
+    }
+  });
+</script>
+</body>
+</html>
