@@ -1,9 +1,7 @@
 {
   "version": 2,
-  "routes": [
-    {
-      "src": "/api/validate",
-      "dest": "/api/validate.js"
-    }
+  "rewrites": [
+    { "source": "/api/check", "destination": "/api/check.js" },
+    { "source": "/(.*)", "destination": "/public/$1" }
   ]
 }
