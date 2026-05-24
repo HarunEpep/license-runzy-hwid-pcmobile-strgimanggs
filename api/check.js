@@ -3,7 +3,7 @@ const LICENSES = [
     { hwid: "HWID-RMX2195-bengal", bot: "ALL", nama: "Apacih", expired: "0" },
     { hwid: "HWID-SM-A055F-a05m", bot: "ALL", nama: "Kuzi", expired: "0" },
     { hwid: "HWID-InfinixX6853-Infinix-X6853", bot: "ALL", nama: "Runzy", expired: "0" },
-    { hwid: "HWID-Redmi8-QC_Reference_Phone", bot: "ALL", nama: "Zaxx", expired: "0" },
+    { hwid: "PC-UUID00000000-0000-0000-0000-D8CB8A1CBC28", bot: "ALL", nama: "Zaxx", expired: "0" },
     { hwid: "HWID-SM-A505F-exynos9610", bot: "ALL", nama: "Trial", expired: "2026-05-23 12:00" },
 ];
 
